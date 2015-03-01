@@ -1,0 +1,24 @@
+{
+  "name": "timeCollector",
+  "version": "1.0.3",
+  "description": "Just a Dev Environment to develop a JIRA Plugin",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "gulp": "^3.8.10",
+    "gulp-concat": "^2.4.3",
+    "gulp-declare": "^0.3.0",
+    "gulp-handlebars": "^3.0.1",
+    "gulp-inject": "^1.0.2",
+    "gulp-load-plugins": "^0.7.1",
+    "gulp-uglifyjs": "^0.5.0",
+    "gulp-wrap": "^0.5.0",
+    "main-bower-files": "^2.1.0",
+    "merge-stream": "^0.1.7",
+    "path": "^0.11.14"
+  }
+}

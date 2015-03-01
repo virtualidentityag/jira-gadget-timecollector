@@ -1,0 +1,7 @@
+.idea
+.DS_Store
+
+gadgetDev/bower_components
+gadgetDev/node_modules
+target
+src

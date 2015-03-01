@@ -1,0 +1,14 @@
+<div class="single-bar cf">
+    <div class="name">{{#if fieldItemLink}}<a href="{{fieldItemLink}}" target="_blank" title="{{fieldItemName}}">{{/if}}{{fieldItemName}}{{#if fieldItemLink}}</a>{{/if}}</div>
+    <div class="bar{{#if state}} {{state}}{{/if}}">
+        <div class="total" style="width:{{totalBarWidth}}%">
+            <div class="progress" style="width:{{totalProgressWidth}}%;"></div>
+            {{#if nologs}}<div class="nologs">0 TW</div>{{/if}}
+        </div>
+        <div class="shortdesc">{{{shortDesc}}}</div>
+        <div class="longdesc">{{{longDesc}}}</div>
+    </div>
+    <div class="percentage">
+        {{#if totalPercent}}{{totalPercent}}%{{/if}}
+    </div>
+</div>
