@@ -3,5 +3,7 @@
 
 gadgetDev/bower_components
 gadgetDev/node_modules
+src/main/resources/css
+src/main/resources/js
 target
-src
+

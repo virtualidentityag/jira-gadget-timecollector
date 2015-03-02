@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Module>
+    <ModulePrefs title="GoldenEye"
+                 directory_title="GoldenEye aka TimeCollector by Virtual Identity"
+                 author="David Losert, Jan Rembold"
+                 description="Sums up worklogs for a given filter by versions, components and tickets"
+                 screenshot='#staticResourceUrl("com.vi.plugins.gadgets.timeCollector:timeCollector-resources","thumbnail.png")'
+                 thumbnail='#staticResourceUrl("com.vi.plugins.gadgets.timeCollector:timeCollector-resources","thumbnail.png")'>
+        <Optional feature="atlassian.util"/>
+        <Require feature="settitle"/>
+        <!-- We need the following packages to be able to config the gadget as described here:
+        https://developer.atlassian.com/display/GADGETS/Creating+a+Gadget+JavaScript+Object
+        -->
+        <Require feature="setprefs"/>
+        <Require feature="views"/>
+        <Require feature="dynamic-height"/>
+        <!-- ^^^^^^^^^^^^^^^^^^^^^^ -->
+        <Require feature="oauthpopup"/>
+        <Require feature="core"/>
+        <Optional feature="gadget-directory">
+            <Param name="categories">
+                JIRA
+            </Param>
+        </Optional>
+        #supportedLocales("gadget.common")
+    </ModulePrefs>
+    <UserPref name="isConfigured" datatype="hidden" default_value="false"/>
+    <UserPref name="refresh" datatype="hidden" default_value="false" />
+    <UserPref name="filterId" datatype="hidden" required="true"/>
+    <UserPref name="titleField" datatype="hidden" />
+    <UserPref name="calculateField" datatype="hidden" />
+    <UserPref name="showField" datatype="hidden" />
+    <UserPref name="sortField" datatype="hidden" />
+    <UserPref name="debugField" datatype="hidden" />
+    <Content type="html" view="profile">
+        <![CDATA[
+            #requireResource("com.atlassian.gadgets.publisher:ajs-gadgets")
+            #requireResource("com.atlassian.jira.gadgets:jira-global")
+            #requireResource("com.atlassian.jira.gadgets:autocomplete")
+            #requireResource("com.vi.plugins.gadgets.timeCollector:timeCollector-resources")
+            #includeResources()
+            <script type="text/javascript">
+                var gadgetHelper = {
+                    baseUrl: '__ATLASSIAN_BASE_URL__'
+                };
+            </script>
+            <div id="view"></div>
+        ]]>
+    </Content>
+</Module>

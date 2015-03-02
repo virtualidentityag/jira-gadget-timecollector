@@ -1,0 +1,38 @@
+<atlassian-plugin key="${project.groupId}.${project.artifactId}" name="${project.name}" plugins-version="2">
+    <plugin-info>
+        <description>${project.description}</description>
+        <version>${project.version}</version>
+        <vendor name="${project.organization.name}" url="${project.organization.url}" />
+        <param name="plugin-icon">images/pluginIcon.png</param>
+        <param name="plugin-logo">images/pluginLogo.png</param>
+    </plugin-info>
+
+    <gadget key="CollectorGadget" name="VI Test Gadget for Ticket Collection" location="timeCollectorGadget.xml"/>
+    <!-- add our i18n resource -->
+    <resource type="i18n" name="i18n" location="timeCollector"/>
+    
+    <!-- add our web resources -->
+    <web-resource key="timeCollector-resources" name="timeCollector Web Resources">
+        <dependency>com.atlassian.auiplugin:ajs</dependency>
+        
+        <resource type="download" name="timeCollector.css" location="/css/timeCollector.css"/>
+        <resource type="download" name="timeCollectorVendor.js" location="/js/timeCollectorVendor.js"/>
+        <resource type="download" name="timeCollectorTemplates.js" location="/js/timeCollectorTemplates.js"/>
+        <resource type="download" name="timeCollector.js" location="/js/timeCollector.js"/>
+        <resource type="download" name="thumbnail.png" location="images/thumbnail.png">
+            <param name="content-type" value="image/png"/>
+        </resource>
+        <resource type="download" name="images/" location="/images"/>
+
+        <context>timeCollector</context>
+    </web-resource>
+    
+    <!-- publish our component -->
+    <component key="myPluginComponent" class="com.vi.plugins.gadgets.MyPluginComponentImpl" public="true">
+        <interface>com.vi.plugins.gadgets.MyPluginComponent</interface>
+    </component>
+    
+    <!-- import from the product container -->
+    <component-import key="applicationProperties" interface="com.atlassian.sal.api.ApplicationProperties" />
+    
+</atlassian-plugin>

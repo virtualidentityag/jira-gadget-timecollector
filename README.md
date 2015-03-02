@@ -16,7 +16,7 @@ Furthermore, Gulp can watch all Files for changes and automatically repackage th
 
 
 # Installation
-============
+
 From a CMD-Terminal execute the following commands:
 
 - **cd gadgetDev**  --> *Change Directory into this Dev-Dir*
@@ -28,13 +28,14 @@ Gulp will now automatically build all resources and put them into the right dire
 It will also watch all files for any changes and execute the belonging compile-task again so you can develop without needing
 to restart anything.
 
+
 # Usage of templates
-==================
+
 Right now, all templates will be added to the Namespace **window.timeCollector.templates** and can be executed from there.
 
 
 # Gulp tasks
-==========
+
 Gulp will concat and minify all JS-Files into a single File **timeCollector.js** and put that file into **src/main/ressources/js/**.
 The same goes for Bower-Files (**timeCollectorVendor.js**).
 Handlebar-Templates will be pre-compiled and put into the same folder as **timeCollectorTemplates.js**.
