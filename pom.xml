@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.vi.plugins.gadgets</groupId>
     <artifactId>timeCollector</artifactId>
-    <version>1.2.7</version>
+    <version>1.2.8</version>
     <organization>
         <name>Virtual Identity</name>
         <url>http://www.virtual-identity.com/</url>
