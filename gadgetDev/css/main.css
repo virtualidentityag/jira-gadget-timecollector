@@ -56,7 +56,8 @@
     vertical-align: middle;
 }
 
-.chart-layer .total-bar .single-bar .name {
+.chart-layer .total-bar .single-bar .name,
+.chart-layer .retainer-bar .single-bar .name{
     font-weight: bold;
 }
 
@@ -140,6 +141,13 @@
     width: 0;
     background-color: #1ea139;
     z-index: 20;
+}
+
+.chart-layer .retainer-bar .single-bar .bar .total {
+    background-color: #d02090;
+}
+.chart-layer .retainer-bar .single-bar .bar .progress {
+    background-color: #ffdd00;
 }
 
 .chart-layer .single-bar .bar.orange .progress {

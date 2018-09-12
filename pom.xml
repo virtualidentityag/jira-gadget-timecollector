@@ -91,6 +91,8 @@
                 <configuration>
                     <source>1.6</source>
                     <target>1.6</target>
+                    <fork>true</fork>
+                    <executable>"C:\Program Files\Java\jdk1.8.0_161\bin\javac"</executable>
                 </configuration>
             </plugin>
         </plugins>
