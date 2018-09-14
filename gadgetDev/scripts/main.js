@@ -47,7 +47,7 @@
                         userpref: "retainerField",
                         class: "retainerField",
                         label: "Retainer Budget",
-                        description: "Angabe des Retainer Budget bitte in TW angeben.",
+                        description: "Hier kann optional ein Retainer Budget hinterlegt werden. (Angabe in TW)",
                         type: "text",
                         value: gadget.getPref("retainerField")
                     };

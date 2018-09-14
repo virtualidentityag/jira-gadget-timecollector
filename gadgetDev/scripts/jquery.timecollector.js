@@ -114,7 +114,7 @@
 
                     // set default values
                     if(fieldName === 'retainer') {
-                        bar.retainer                = self.parseInt(self.options.gadget.getPref('retainerField'))*8*60*60;
+                        bar.retainer                = self.options.gadget.getPref('retainerField')*8*60*60;
                         bar.summedOriginalEstimate  = self.getWorkingDays(bar.retainer);
                         bar.summedTimeSpent         = self.getWorkingDays(bar.originalEstimate);
                         bar.summedRemainingEstimate = self.getWorkingDays((bar.timeSpent + bar.remainingEstimate) - bar.originalEstimate);
@@ -195,48 +195,49 @@
                         }
                     }
 
-                  if(fieldName === 'retainer'){
-                    bar.shortDesc = '<span class="sum">&sum;</span> '+bar.total+' TW';
-                    bar.shortDesc += bar.summedOriginalEstimate > 0 ? ' (Projektvolumen: '+bar.summedOriginalEstimate+' TW)' : ' (Ohne Projektvolumen)';
+                    if(fieldName === 'retainer'){
+                        bar.shortDesc = '<span class="sum">&sum;</span> '+bar.total+' TW';
+                        bar.shortDesc += bar.summedOriginalEstimate > 0 ? ' (Projektvolumen: '+bar.summedOriginalEstimate+' TW)' : ' (Ohne Projektvolumen)';
 
-                    bar.longDesc = bar.summedTimeSpent+' TW geschätzte Aufwände';
-                    bar.longDesc += bar.summedRemainingEstimate > 0 ? ' + '+bar.summedRemainingEstimate+' TW zusätzliche Aufwände' : '';
-                    bar.longDesc += bar.summedOriginalEstimate > 0 ? ' (Projektvolumen: '+bar.summedOriginalEstimate+' TW)' : ' (Ohne Projektvolumen)';
-                  } else {
-                    // set short and long descriptions
-                    bar.shortDesc = '<span class="sum">&sum;</span> '+bar.total+' TW';
-                    bar.shortDesc += bar.summedOriginalEstimate > 0 ? ' (Schätzung: '+bar.summedOriginalEstimate+' TW)' : ' (Ohne Schätzung)';
+                        bar.longDesc = bar.summedTimeSpent+' TW geschätzte Aufwände';
+                        bar.longDesc += bar.summedRemainingEstimate > 0 ? ' + '+bar.summedRemainingEstimate+' TW zusätzliche Aufwände' : '';
+                        bar.longDesc += bar.summedOriginalEstimate > 0 ? ' (Projektvolumen: '+bar.summedOriginalEstimate+' TW)' : ' (Ohne Projektvolumen)';
+                    } else {
+                        // set short and long descriptions
+                        bar.shortDesc = '<span class="sum">&sum;</span> '+bar.total+' TW';
+                        bar.shortDesc += bar.summedOriginalEstimate > 0 ? ' (Schätzung: '+bar.summedOriginalEstimate+' TW)' : ' (Ohne Schätzung)';
 
-                    bar.longDesc = bar.summedTimeSpent+' TW geleistet';
-                    bar.longDesc += bar.summedRemainingEstimate > 0 ? ' + '+bar.summedRemainingEstimate+' TW verbleibend' : '';
-                    bar.longDesc += bar.summedOriginalEstimate > 0 ? ' (Schätzung: '+bar.summedOriginalEstimate+' TW)' : ' (Ohne Schätzung)';
+                        bar.longDesc = bar.summedTimeSpent+' TW geleistet';
+                        bar.longDesc += bar.summedRemainingEstimate > 0 ? ' + '+bar.summedRemainingEstimate+' TW verbleibend' : '';
+                        bar.longDesc += bar.summedOriginalEstimate > 0 ? ' (Schätzung: '+bar.summedOriginalEstimate+' TW)' : ' (Ohne Schätzung)';
 
-                    // no estimation entries
-                    if(bar.summedOriginalEstimate == 0) {
-                        if(bar.summedTimeSpent > 0) {
+                        // no estimation entries
+                        if(bar.summedOriginalEstimate == 0) {
+                            if(bar.summedTimeSpent > 0) {
 
-                            // worklogs are available
-                            bar.totalPercent = null;
+                                // worklogs are available
+                                bar.totalPercent = null;
 
-                        } else {
+                            } else {
 
-                            // no worklogs at all
-                            bar.totalPercent = 0;
+                                // no worklogs at all
+                                bar.totalPercent = 0;
+                                bar.totalBarWidth = cssWidthTo100Percent;
+                                bar.totalProgressWidth = 0;
+                                bar.nologs = true;
+                                bar.shortDesc = '';
+                                bar.longDesc = '';
+                                bar.state = 'transparent';
+
+                            }
+                        }
+
+                        // estimation exists but total is 0 - extremly rare use case
+                        if(bar.summedOriginalEstimate > 0 && bar.total === 0) {
                             bar.totalBarWidth = cssWidthTo100Percent;
                             bar.totalProgressWidth = 0;
-                            bar.nologs = true;
-                            bar.shortDesc = '';
-                            bar.longDesc = '';
                             bar.state = 'transparent';
-
                         }
-                    }
-
-                    // estimation exists but total is 0 - extremly rare use case
-                    if(bar.summedOriginalEstimate > 0 && bar.total === 0) {
-                        bar.totalBarWidth = cssWidthTo100Percent;
-                        bar.totalProgressWidth = 0;
-                        bar.state = 'transparent';
                     }
                 });
             });
@@ -246,7 +247,7 @@
 
             // set retainer fieldname
             if(this.data.retainer){
-              this.data.retainer[0].fieldItemName = 'Retainer/ Projekt';
+              this.data.retainer[0].fieldItemName = 'Retainer';
             }
         },
 
