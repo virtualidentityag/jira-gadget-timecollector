@@ -41,6 +41,17 @@
                         type: "text",
                         value: gadget.getPref("titleField")
                     };
+
+                    var retainerField = {
+                        id: "retainerField",
+                        userpref: "retainerField",
+                        class: "retainerField",
+                        label: "Retainer Budget",
+                        description: "Hier kann optional ein Retainer Budget hinterlegt werden. (Angabe in TW)",
+                        type: "text",
+                        value: gadget.getPref("retainerField")
+                    };
+
                     var sortField = {
                         id: "sortField",
                         userpref: "sortField",
@@ -146,6 +157,7 @@
                     return {
                         fields: [
                             titleField,
+                            retainerField,
                             filterSearchField,
                             calculateField,
                             showField,

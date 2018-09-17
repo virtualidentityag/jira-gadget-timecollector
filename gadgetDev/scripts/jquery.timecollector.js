@@ -55,6 +55,10 @@
 
             // set fields to calculate statistics
             var defaults = ['total'];
+            var retainerField = this.options.gadget.getPref('retainerField') || '';
+            if(retainerField && retainerField !== ''){
+                defaults = ['total', 'retainer'];
+            }
             var calculateFieldsPref = this.options.gadget.getPref('calculateField') || '';
             if(calculateFieldsPref && calculateFieldsPref !== '' && calculateFieldsPref !== 'false') {
                 this.options.grabFields = $.merge(defaults, calculateFieldsPref.split('|'));
@@ -109,11 +113,18 @@
                 $.each(self.data[fieldName], function(j, bar){
 
                     // set default values
-                    bar.summedOriginalEstimate  = self.getWorkingDays(bar.originalEstimate);
-                    bar.summedTimeSpent         = self.getWorkingDays(bar.timeSpent);
-                    bar.summedRemainingEstimate = self.getWorkingDays(bar.remainingEstimate);
-                    bar.total                   = self.getWorkingDays(bar.timeSpent + bar.remainingEstimate);
-                    bar.totalPercent            = bar.summedOriginalEstimate > 0 ? Math.round(bar.total / bar.summedOriginalEstimate * 100) : 100;
+                    if(fieldName === 'retainer') {
+                        bar.retainer                = self.options.gadget.getPref('retainerField')*8*60*60;
+                        bar.summedOriginalEstimate  = self.getWorkingDays(bar.retainer);
+                        bar.summedTimeSpent         = self.getWorkingDays(bar.originalEstimate);
+                        bar.summedRemainingEstimate = self.getWorkingDays((bar.timeSpent + bar.remainingEstimate) - bar.originalEstimate);
+                    } else {
+                        bar.summedOriginalEstimate  = self.getWorkingDays(bar.originalEstimate);
+                        bar.summedTimeSpent         = self.getWorkingDays(bar.timeSpent);
+                        bar.summedRemainingEstimate = self.getWorkingDays(bar.remainingEstimate);
+                    }
+                    bar.total                       = self.getWorkingDays(bar.timeSpent + bar.remainingEstimate);
+                    bar.totalPercent                = bar.summedOriginalEstimate > 0 ? Math.round(bar.total / bar.summedOriginalEstimate * 100) : 100;
 
                     if(typeof(maxTotalPercent[fieldName]) === 'undefined' || maxTotalPercent[fieldName] < bar.totalPercent) {
                         maxTotalPercent[fieldName] = bar.totalPercent;
@@ -185,12 +196,22 @@
                     }
 
                     // set short and long descriptions
-                    bar.shortDesc = '<span class="sum">&sum;</span> '+bar.total+' TW';
-                    bar.shortDesc += bar.summedOriginalEstimate > 0 ? ' (Schätzung: '+bar.summedOriginalEstimate+' TW)' : ' (Ohne Schätzung)';
+                    if(fieldName === 'retainer'){
+                        bar.shortDesc = '<span class="sum">&sum;</span> '+bar.total+' TW';
+                        bar.shortDesc += bar.summedOriginalEstimate > 0 ? ' (Projektvolumen: '+bar.summedOriginalEstimate+' TW)' : ' (Ohne Projektvolumen)';
 
-                    bar.longDesc = bar.summedTimeSpent+' TW geleistet';
-                    bar.longDesc += bar.summedRemainingEstimate > 0 ? ' + '+bar.summedRemainingEstimate+' TW verbleibend' : '';
-                    bar.longDesc += bar.summedOriginalEstimate > 0 ? ' (Schätzung: '+bar.summedOriginalEstimate+' TW)' : ' (Ohne Schätzung)';
+                        bar.longDesc = bar.summedTimeSpent+' TW geschätzte Aufwände';
+                        bar.longDesc += bar.summedRemainingEstimate > 0 ? ' + '+bar.summedRemainingEstimate+' TW zusätzliche Aufwände' : '';
+                        bar.longDesc += bar.summedOriginalEstimate > 0 ? ' (Projektvolumen: '+bar.summedOriginalEstimate+' TW)' : ' (Ohne Projektvolumen)';
+                    } else {
+                        // set short and long descriptions
+                        bar.shortDesc = '<span class="sum">&sum;</span> ' + bar.total + ' TW';
+                        bar.shortDesc += bar.summedOriginalEstimate > 0 ? ' (Schätzung: ' + bar.summedOriginalEstimate + ' TW)' : ' (Ohne Schätzung)';
+
+                        bar.longDesc = bar.summedTimeSpent + ' TW geleistet';
+                        bar.longDesc += bar.summedRemainingEstimate > 0 ? ' + ' + bar.summedRemainingEstimate + ' TW verbleibend' : '';
+                        bar.longDesc += bar.summedOriginalEstimate > 0 ? ' (Schätzung: ' + bar.summedOriginalEstimate + ' TW)' : ' (Ohne Schätzung)';
+                    }
 
                     // no estimation entries
                     if(bar.summedOriginalEstimate == 0) {
@@ -224,6 +245,11 @@
 
             // set total fieldname
             this.data.total[0].fieldItemName = 'Total';
+
+            // set retainer fieldname
+            if(this.data.retainer){
+              this.data.retainer[0].fieldItemName = 'Retainer';
+            }
         },
 
         sortData: function(){

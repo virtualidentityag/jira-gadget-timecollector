@@ -28,6 +28,7 @@
     <UserPref name="refresh" datatype="hidden" default_value="false" />
     <UserPref name="filterId" datatype="hidden" required="true"/>
     <UserPref name="titleField" datatype="hidden" />
+    <UserPref name="retainerField" datatype="hidden" />
     <UserPref name="calculateField" datatype="hidden" />
     <UserPref name="showField" datatype="hidden" />
     <UserPref name="sortField" datatype="hidden" />
