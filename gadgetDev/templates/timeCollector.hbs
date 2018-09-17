@@ -11,14 +11,14 @@
                 {{>bar}}
             {{/each}}
         </div>
-      {{#if retainer}}
-        <div class="retainer-bar">
-          {{#each retainer}}
-            {{>bar}}
-          {{/each}}
-        </div>
-      {{/if}}
-      <div class="tabs">
+        {{#if retainer}}
+            <div class="retainer-bar">
+                {{#each retainer}}
+                    {{>bar}}
+                {{/each}}
+            </div>
+        {{/if}}
+        <div class="tabs">
             {{#if components}}<a href="#components"{{#if activateComponentTab}} class="active"{{/if}}>Komponenten</a>{{/if}}
             {{#if fixVersions}}<a href="#versions"{{#if activateVersionTab}} class="active"{{/if}}>Versionen</a>{{/if}}
             {{#if tickets}}<a href="#tickets"{{#if activateTicketTab}} class="active"{{/if}}>Tickets</a>{{/if}}

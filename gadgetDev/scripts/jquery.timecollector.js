@@ -195,6 +195,7 @@
                         }
                     }
 
+                    // set short and long descriptions
                     if(fieldName === 'retainer'){
                         bar.shortDesc = '<span class="sum">&sum;</span> '+bar.total+' TW';
                         bar.shortDesc += bar.summedOriginalEstimate > 0 ? ' (Projektvolumen: '+bar.summedOriginalEstimate+' TW)' : ' (Ohne Projektvolumen)';
@@ -215,10 +216,12 @@
                     // no estimation entries
                     if(bar.summedOriginalEstimate == 0) {
                         if(bar.summedTimeSpent > 0) {
+
                             // worklogs are available
                             bar.totalPercent = null;
 
                         } else {
+
                             // no worklogs at all
                             bar.totalPercent = 0;
                             bar.totalBarWidth = cssWidthTo100Percent;
@@ -227,6 +230,7 @@
                             bar.shortDesc = '';
                             bar.longDesc = '';
                             bar.state = 'transparent';
+
                         }
                     }
 
