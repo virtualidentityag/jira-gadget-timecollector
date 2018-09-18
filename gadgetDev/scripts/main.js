@@ -170,7 +170,7 @@
                 args: [
                     {
                         key: 'filter',
-                        ajaxOptions: '/rest/gadget/1.0/filtersAndProjects'
+                        ajaxOptions: atlassian.util.getRendererBaseUrl()+'/rest/gadget/1.0/filtersAndProjects'
                     }
                 ]
             },
@@ -193,7 +193,7 @@
 
                             // limit query fields
                             var requiredFields = ['fixVersions', 'components', 'timeestimate', 'timeoriginalestimate', 'timespent', 'summary'];
-                            var url = '/rest/api/2/search?jql=filter=' + filterId + '&fields=' + requiredFields.join(',')+'&maxResults=2000';
+                            var url = atlassian.util.getRendererBaseUrl()+'/rest/api/2/search?jql=filter=' + filterId + '&fields=' + requiredFields.join(',')+'&maxResults=2000';
 
                             // or grab all
                             //var url = '/rest/api/2/search?jql=filter=' + filterId + '&fields=*all&maxResults=2000';
